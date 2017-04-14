@@ -1,7 +1,17 @@
 var elements = document.getElementsByTagName('*');
 
+function getWage(){
+
+    ///Save value using the Chrom extension storage API
+    chrome.storage.sync.set({'value':theValue}, function(){
+        //Notify that we saved.
+        message('Settings saved');
+    })
+}
+
+
 function convert(price){
-    return price * 2;
+    return price * 2.00;
 }
 
 for (var i = 0; i < elements.length; i++) {
@@ -14,24 +24,29 @@ for (var i = 0; i < elements.length; i++) {
             var text = node.nodeValue;
             if (text[0] == '$'){
                 if (/\s/.test(text)){
-                    var price = text.substring(1, text.indexOf(' '));
+                    var price = text.substring(0, text.indexOf(' '));
+                    var priceNum = text.substring(1, text.indexOf(' '));
                     console.log('Found One!');
-                    console.log(price);
-                    var time = convert(1);
+                    console.log(convert(parseFloat(price)));
+                    var time = convert(parseFloat(priceNum));
                     var timeStr = time.toString();
                     if (text.length > 5){
                         var remainder = text.substring(4);
                         console.log(remainder);
                         var nextPrice = remainder.indexOf('$');
                         console.log(nextPrice);
-                        var priceTwo = remainder.substring(nextPrice);
-                        console.log(remainder);
+                        if (nextPrice != -1){
+                            var priceTwo = remainder.substring(nextPrice);
+                        }
+                        var priceTwo = null;
+                        console.log(priceTwo);
                     }
                 }
                 else {
-                    var price = text.substring(1);
-                    var time = convert(2);
-                    var timeStr = time.toString();
+                    var price = text.substring(0);
+                    var priceNum = text.substring(1);
+                    var time = convert(parseFloat(priceNum));
+                    var timeStr = time.toFixed(2);
                     console.log('Found One!');
                     console.log(price); 
                 }
