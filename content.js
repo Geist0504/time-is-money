@@ -9,9 +9,8 @@ function getWage(){
     })
 }
 
-
 function convert(price){
-    return price * 2.00;
+    return price / 19.50;
 }
 
 for (var i = 0; i < elements.length; i++) {
@@ -29,7 +28,7 @@ for (var i = 0; i < elements.length; i++) {
                     console.log('Found One!');
                     console.log(convert(parseFloat(price)));
                     var time = convert(parseFloat(priceNum));
-                    var timeStr = time.toString();
+                    var timeStr = time.toFixed(2);
                     if (text.length > 5){
                         var remainder = text.substring(4);
                         console.log(remainder);
@@ -55,7 +54,7 @@ for (var i = 0; i < elements.length; i++) {
             var replacedText1 = replacedText1.replace(priceTwo, 'Free');
 
             if (replacedText1 !== text) {
-                element.replaceChild(document.createTextNode(replacedText1), node);
+                element.replaceChild(document.createTextNode(replacedText1 + ' hours'), node);
             }
         }
     }

@@ -4,11 +4,12 @@
 		<title>
 			Time is Money!
 		</title>
+		<script src="content.js"></script>
 	</head>
 	<body>
-		<form>
-			<input type="text" name="salary" value="Enter Salary"/>
-			<input type="text" name="hourly" value="Or Enter Hourly Wage"/>
+		<form action="/submit" method="post">
+			<input type="text" name="salary" placeholder="Enter Salary"/>
+			<input type="text" name="hourly" placeholder="Or Enter Hourly Wage"/>
 			<input type="submit" value="Submit"/>
 		</form>
 	</body>
