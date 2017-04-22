@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
-		<title>
-			Time is Money!
-		</title>
-		<script src="content.js"></script>
+		<meta charset="utf-8">
+		<title>Time is Money!</title>
+		<script type= "text/javascript" src="jquery-3.2.1.min.js"></script>
+		<script type= "text/javascript" src="content.js"></script>
+		<link rel = "stylesheet" type="text/css" href ="assets/stylesheets/main.css"/>
 	</head>
 	<body>
-		<form action="/submit" method="post">
-			<input type="text" name="salary" placeholder="Enter Salary"/>
-			<input type="text" name="hourly" placeholder="Or Enter Hourly Wage"/>
-			<input type="submit" value="Submit"/>
-		</form>
+	<!-- <p class= "test">This is a test of the CSS connection</p> -->
+			<input type="textarea" id = "salary" name="salary" placeholder="Enter Salary"/>
+			<input type="textarea" id = "hourly" name="hourly" placeholder="Or Enter Hourly Wage"/>
+			<input class = "btn" id = "btn" type="submit" value="Submit"/><br>
+			<input class = "btn" id = "update" type="submit" value="Update"/>
+
+		<div id="changeMe">
+			I'm different!
+		</div>
 	</body>
 </html>
 

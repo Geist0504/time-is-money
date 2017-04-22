@@ -1,17 +1,49 @@
-var elements = document.getElementsByTagName('*');
+$(document).ready(function(){ 
 
-function getWage(){
+    chrome.storage.sync.get('salary', function(result){
+        $('#salary').attr('placeholder', result.salary);
+        console.log(result.salary);
+    });
+
+    $("#btn").click(function(){
+        var getVal = $('#hourly').val();
+        chrome.storage.sync.set({'salary':getVal}, function(){
+            console.log('Settings saved')
+        });
+        $('#changeMe').append('Test!');
+        console.log(getVal)
+        $('#salary').attr('placeholder', 'worked');
+    });
+
+    $('#update').click(function(){
+        chrome.storage.sync.get('salary', function(result){
+            $('#salary').attr('placeholder', result.salary);
+            console.log(result.salary);
+        });
+    });
+});
+
+function getWage(theValue){
+
+    var theValue = textarea.value;
+
+    if(!theValue) {
+        message('Error: No value specified');
+        return;
+    }
 
     ///Save value using the Chrom extension storage API
     chrome.storage.sync.set({'value':theValue}, function(){
         //Notify that we saved.
         message('Settings saved');
-    })
+    });
 }
 
 function convert(price){
     return price / 19.50;
 }
+
+var elements = document.getElementsByTagName('*');
 
 for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
@@ -59,3 +91,4 @@ for (var i = 0; i < elements.length; i++) {
         }
     }
 }
+
