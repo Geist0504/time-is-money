@@ -1,25 +1,31 @@
 $(document).ready(function(){ 
 
+    var salary;
+    var hourly;
+
     chrome.storage.sync.get('salary', function(result){
-        $('#salary').attr('placeholder', result.salary);
+        test = result.salary;
+        console.log(test);
+        if(test != undefined){
+        chrome.storage.sync.get('salary', function(result){
+            $('#salary').attr('placeholder', '$'+result.salary+'/year');
         console.log(result.salary);
+        });
+        chrome.storage.sync.get('hourly', function(result){
+            $('#hourly').attr('placeholder', '$'+result.hourly+'/hour');
+        });
+    }
     });
 
     $("#btn").click(function(){
-        var getVal = $('#hourly').val();
-        chrome.storage.sync.set({'salary':getVal}, function(){
+        var hourly = parseFloat($('#hourly').val());
+        var salary = 2080.00 * hourly;
+        chrome.storage.sync.set({'salary':salary}, function(){
             console.log('Settings saved')
         });
-        $('#changeMe').append('Test!');
-        console.log(getVal)
-        $('#salary').attr('placeholder', 'worked');
-    });
-
-    $('#update').click(function(){
-        chrome.storage.sync.get('salary', function(result){
-            $('#salary').attr('placeholder', result.salary);
-            console.log(result.salary);
-        });
+        chrome.storage.sync.set({'hourly':hourly});
+        console.log(hourly);
+        $('#salary').attr('placeholder', '$' + salary);
     });
 });
 
