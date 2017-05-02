@@ -1,4 +1,4 @@
-<<<<<<< HEAD
 # time-is-money
-This is your Chrome extension which replaces a word or phrase with a different word or phrase. 
->>>>>>> 1087a648e0a1360fa5321dcfa1edb4a5b2e35f15
+This is a Chrome extension which replaces a price with the hours you would need to work to earn enough to afford that item
+
+
