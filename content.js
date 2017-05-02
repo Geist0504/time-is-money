@@ -1,6 +1,8 @@
 var salary;
 var hourly;
 
+
+//accesses stored wages and populates them in popup window if applicable
 function wages(){
 
     chrome.storage.sync.get('salary', function(result){
@@ -41,10 +43,13 @@ $(document).ready(function(){
     });
 });
 
+//converts a supplied price into hours of work
 function convert(price, hourly){
     return price / hourly;
 }
 
+
+//iterate through page converting and replacing values as you find them
 var elements = document.getElementsByTagName('*');
 chrome.storage.sync.get('hourly', function(result){
         hourly = result.hourly;
@@ -69,10 +74,10 @@ chrome.storage.sync.get('hourly', function(result){
                                 var nextPrice = remainder.indexOf('$');
                                 console.log(nextPrice);
                                 if (nextPrice != -1){
-                                    var priceTwo = remainder.substring(nextPrice, remainder.indexOf(' '));
+                                    var newPrice = remainder.substring(nextPrice, remainder.indexOf(' '));
                                 }
                                 console.log(priceTwo);
-                                var timeStrTwo = convert(parseFloat(priceTwo),hourly).toFixed(2);
+                                var timeStrTwo = convert(parseFloat(newPrice),hourly).toFixed(2);
                             }
                         }
                         else {
@@ -91,6 +96,7 @@ chrome.storage.sync.get('hourly', function(result){
                             if (text.length > 5){
                                 var newStart = text.indexOf('$', start+1);
                                 var newPrice = text.substring(newStart, text.indexOf(' ', newStart));
+                                console.log(newPrice);
                                 var priceNumTwo = parseFloat(text.substring(newStart+1));
                                 var timeTwo = convert(priceNumTwo, hourly);
                                 var timeStrTwo = timeTwo.toFixed(2) + ' hours';
@@ -99,7 +105,7 @@ chrome.storage.sync.get('hourly', function(result){
                         }
 
                     var replacedText1 = text.replace(price, timeStr);
-                    var replacedText1 = replacedText1.replace(priceTwo, timeStrTwo);
+                    // NOT WORKING var replacedText1 = replacedText1.replace(newPrice, timeStrTwo); //
 
                     if (replacedText1 !== text && hourly != undefined) {
                         element.replaceChild(document.createTextNode(replacedText1), node);
