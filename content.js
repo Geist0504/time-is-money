@@ -76,12 +76,13 @@ chrome.storage.sync.get('hourly', function(result){
                                 if (nextPrice != -1){
                                     var newPrice = remainder.substring(nextPrice, remainder.indexOf(' '));
                                 }
-                                console.log(priceTwo);
+                                console.log(nextPrice);
                                 var timeStrTwo = convert(parseFloat(newPrice),hourly).toFixed(2);
                             }
                         }
                         else {
                             var price = text.substring(0);
+                            console.log("Solo element " +  price);
                             var priceNum = text.substring(1);
                             var time = convert(parseFloat(priceNum), hourly);
                             var timeStr = time.toFixed(2) + ' hours';
@@ -89,10 +90,13 @@ chrome.storage.sync.get('hourly', function(result){
                     }
                     else if (text.indexOf('$') != -1) {
                             var start = text.indexOf('$');
+                            console.log(start);
                             var price = text.substring(start, text.indexOf(' ', start));
+                            console.log(price);
                             var priceNum = parseFloat(text.substring(start+1));
                             var time = convert(priceNum, hourly);
                             var timeStr = time.toFixed(2) + ' hours';
+                            console.log(timeStr);
                             if (text.length > 5){
                                 var newStart = text.indexOf('$', start+1);
                                 var newPrice = text.substring(newStart, text.indexOf(' ', newStart));
@@ -107,7 +111,7 @@ chrome.storage.sync.get('hourly', function(result){
                     var replacedText1 = text.replace(price, timeStr);
                     // NOT WORKING var replacedText1 = replacedText1.replace(newPrice, timeStrTwo); //
 
-                    if (replacedText1 !== text && hourly != undefined) {
+                    if (replacedText1 !== text && hourly != undefined  && price.indexOf('$')==0) {
                         element.replaceChild(document.createTextNode(replacedText1), node);
                     }
                 }
